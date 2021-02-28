@@ -11,7 +11,7 @@ class Main {
 
     public static void main(String[] args) {
         String myString = new String();
-        myString = "\nStringy strings\n";
+        myString = "\nStringy strings!\n";
         myMethod(myString);
     }
 }
