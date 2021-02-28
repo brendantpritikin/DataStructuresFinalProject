@@ -13,7 +13,7 @@ class Main {
 
     public static void main(String[] args) {
         String myString = new String();
-        myString = "\nHola compadres\n";
+        myString = "\nHello there\n";
         myMethod(myString);
     }
 }
