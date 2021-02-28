@@ -8,6 +8,7 @@ class Main {
 
 
 
+
     public static void main(String[] args) {
         String myString = new String();
         myString = "\nHello there\n";
