@@ -1,7 +1,5 @@
-class Main {
-
+public class InteractionStackTest {
     public static void main(String[] args) {
-      // Build up to MyNetwork
         Interaction test = new Interaction("03-10-2021", "Taking a test run",
                 "This is simply to test the Interaction class. Don\'t you worry, there\'s nothing else going on here.");
 
@@ -13,21 +11,11 @@ class Main {
         testStack.addInteraction(test2);
         testStack.addInteraction(test);
 
-        ContactInformation emma = new ContactInformation(1234567890, "Emma Flatland", "Data Analyst",
-                "Data Co.", testStack);
+        testStack.showInteractions();
 
-        ContactInformation brendan = new ContactInformation(5642843395L, "Brendan Pritikin",
-                "Software Programmer", "Cal Data", testStack);
-
-        // MyNetwork Construction
-
-        MyNetwork network = new MyNetwork();
-        network.addContact(emma);
-        network.addContact(brendan);
-
-        // MyNetwork Testing
-
-        network.showNetwork();
-    
+        testStack.checkLastInteraction();
+        testStack.showInteractions();
+        testStack.findSubject("Another Test Run");
+        System.out.println(testStack.isEmpty());
     }
 }

@@ -1,7 +1,7 @@
-class Main {
-
+public class ContactInformationTest {
     public static void main(String[] args) {
-      // Build up to MyNetwork
+
+        // Creating a dummy Contact
         Interaction test = new Interaction("03-10-2021", "Taking a test run",
                 "This is simply to test the Interaction class. Don\'t you worry, there\'s nothing else going on here.");
 
@@ -16,18 +16,10 @@ class Main {
         ContactInformation emma = new ContactInformation(1234567890, "Emma Flatland", "Data Analyst",
                 "Data Co.", testStack);
 
-        ContactInformation brendan = new ContactInformation(5642843395L, "Brendan Pritikin",
-                "Software Programmer", "Cal Data", testStack);
+        // Testing ContactInformation methods
 
-        // MyNetwork Construction
+        emma.showContact();
 
-        MyNetwork network = new MyNetwork();
-        network.addContact(emma);
-        network.addContact(brendan);
-
-        // MyNetwork Testing
-
-        network.showNetwork();
-    
+        System.out.println(emma.key());
     }
 }
