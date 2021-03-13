@@ -18,18 +18,22 @@ class ContactInformation{
     System.out.println("Contact: "+ name);
     System.out.println("Phone: " + number);
     System.out.println("Company: " + company);
-    system.out.println("Job: " + job);
+    System.out.println("Job: " + job);
     System.out.println("All interactions: ");
     interactions.showInteractions();
   }
 
 
   public int key(){
-    keyString = this.name.toLowerCase();
+    String keyString = this.name.toLowerCase();
     int key = 0;
     for (int i = 0; i < keyString.length(); i++) {
             key += keyString.charAt(i);
     }
     return key;
   }
+
+  public String getName(){
+        return name;
+    }
 }

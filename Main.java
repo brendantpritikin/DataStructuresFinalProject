@@ -1,3 +1,4 @@
+import java.util.Calendar;
 class Main {
 
     public static void main(String[] args) {
@@ -28,6 +29,12 @@ class Main {
         // MyNetwork Testing
 
         network.showNetwork();
+
+        Calendar today = Calendar.getInstance();
+        today.set(2021, 3, 11);
+        Calendar tomorrow = Calendar.getInstance();
+        tomorrow.set(2021, 3, 12);
+        System.out.println(today.compareTo(tomorrow));
     
     }
 }
