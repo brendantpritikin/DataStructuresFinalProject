@@ -4,9 +4,9 @@ class ContactInformation{
   private String name;
   private String company;
   private String job;
-  private InteractionStack interactions; 
+  private InteractionDictionary interactions; 
 
-  public ContactInformation(int number, String name, String job, String company, InteractionStack interactions){
+  public ContactInformation(int number, String name, String job, String company, InteractionDictionary interactions){
     this.number = number;
     this.name = name;
     this.job = job;
@@ -36,4 +36,14 @@ class ContactInformation{
   public String getName(){
         return name;
     }
+
+  public InteractionList getSubject(String subjectName)
+  {
+     return interactions.findSubject(subjectName);
+  }
+
+  public InteractionDictionary getInteractions()
+  {
+    return interactions;
+  }
 }
