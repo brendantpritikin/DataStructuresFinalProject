@@ -4,24 +4,13 @@ import java.util.Calendar;
 public class InteractionDictionary{
     private InteractionList[] subjectList;
 
-    /**
-    *
-    *
-    */
     public InteractionDictionary(){
         this.subjectList = new InteractionList[7];
     }
 
     /**
-     public boolean isEmpty(){
-
-     }
+     * Shows all interactions in the dictionary.
      */
-
-    /**
-    *
-    *
-    */
     public void showInteractions(){
 
         ArrayList<Interaction> allInteractions = getAllInteractions();
@@ -33,9 +22,10 @@ public class InteractionDictionary{
     }
 
     /**
-    *
-    *
-    */
+     * Gets all interactions in the dictionary
+     *
+     * @return ArrayList of all interactions
+     */
     public ArrayList<Interaction> getAllInteractions()
     {
         ArrayList<Interaction> allInteractions = new ArrayList<>();
@@ -71,7 +61,7 @@ public class InteractionDictionary{
 
     /**
      * A merge helper function for mergeSort.
-     *
+     * Professor Aaron Cass provided help making this method for Programming on Purpose (CSC-120) in Fall 2021
      * @param l1 The first list to be merged
      * @param l2 The second list to be merged
      * @return The combined list
@@ -180,84 +170,58 @@ public class InteractionDictionary{
     }
 
 
-// The two commented methods below are the ones I would suggest with the InteractionList, I had some difficulty adapting the existing versions of these methods -Emma
-
+    /**
+     * Adds an interaction to the dictionary.
+     *
+     * @param toAdd Interaction to add
+     */
     public void addInteraction (Interaction toAdd) {
-         String interactionSubject = toAdd.getSubject();
-         int hashIndex = hashIndex(interactionSubject);
+        String interactionSubject = toAdd.getSubject();
+        int hashIndex = hashIndex(interactionSubject);
 
-         InteractionList currentList = subjectList[hashIndex];
+        InteractionList currentList = subjectList[hashIndex];
 
-         if(currentList == null)
-         {
-             ArrayList<Interaction> inList = new ArrayList<>();
-             inList.add(toAdd);
-             subjectList[hashIndex] = new InteractionList(toAdd.getSubject(), inList);
-         }
-         else
-         {
+        if(currentList == null)
+        {
+            ArrayList<Interaction> inList = new ArrayList<>();
+            inList.add(toAdd);
+            subjectList[hashIndex] = new InteractionList(toAdd.getSubject(), inList);
+        }
+        else
+        {
             int nextEmptyIndex = linearProbe(interactionSubject, hashIndex);
             currentList = subjectList[nextEmptyIndex];
             currentList.addInteraction(toAdd);
-         }
-         if (this.atLoadCapacity()){
-             this.increaseCapacity();
-         }
-     }
-
-     public int linearProbe(String interactionSubject, int hashIndex)
-     {
-         InteractionList currentList = subjectList[hashIndex];
-         String listSubject = currentList.getSubject();
-
-         while(interactionSubject != listSubject && interactionSubject != null)
-         {
-             hashIndex++;
-             if(hashIndex > subjectList.length - 1)
-             {
-                 hashIndex -= this.subjectList.length;
-             }
-             currentList = subjectList[hashIndex];
-             listSubject = currentList.getSubject();
-         }
-         return hashIndex;
-     }
-
-
-
-/*
-
-    public void addInteraction(Interaction interaction) {
-        String subject = interaction.getSubject();
-        int index = this.hashIndex(subject);
-        if (this.subjectList[index] != null) {
-            int newIndex = this.linearProbe(index, 1);
-            this.subjectList[newIndex] = interaction;
         }
-        else {
-            this.subjectList[index] = interaction;
-        }
-        if (this.atLoadCapacity()) {
+        if (this.atLoadCapacity()){
             this.increaseCapacity();
         }
     }
 
+    /**
+     * Performs a linear probe to return the appropriate index for the interaction.
+     *
+     * @param interactionSubject Subject of interaction
+     * @param hashIndex Current hash index
+     * @return The new index
+     */
+    public int linearProbe(String interactionSubject, int hashIndex)
+    {
+        InteractionList currentList = subjectList[hashIndex];
+        String listSubject = currentList.getSubject();
 
-
-
-    public int linearProbe(int index, int j) {
-        index += j;
-        if (index > this.subjectList.length - 1) {
-            index -= this.subjectList.length;
+        while(interactionSubject != listSubject && interactionSubject != null)
+        {
+            hashIndex++;
+            if(hashIndex > subjectList.length - 1)
+            {
+                hashIndex -= this.subjectList.length;
+            }
+            currentList = subjectList[hashIndex];
+            listSubject = currentList.getSubject();
         }
-        if (this.subjectList[index] != null){
-            return linearProbe(index, j + 1);
-        }
-        else{
-            return index;
-        }
+        return hashIndex;
     }
-*/
 
     /**
      * Checks to see if InteractionDictionary is at load capacity.
@@ -300,17 +264,18 @@ public class InteractionDictionary{
     }
 
     /**
-    *
-    *
-    */
+     * Adds an InteractionList to the dictionary.
+     *
+     * @param list The InteractionList
+     */
     private void addInteractionList(InteractionList list){
-         int index = this.hashIndex(list.getSubject());
-         if (this.subjectList[index] == null){
-             this.subjectList[index] = list;
-         }
-         else{
-             this.subjectList[linearProbe(list.getSubject(), index)] = list;
-         }
+        int index = this.hashIndex(list.getSubject());
+        if (this.subjectList[index] == null){
+            this.subjectList[index] = list;
+        }
+        else{
+            this.subjectList[linearProbe(list.getSubject(), index)] = list;
+        }
     }
 
     /**
@@ -325,8 +290,6 @@ public class InteractionDictionary{
         if (num <= 3)
             return true;
 
-        // This is checked so that we can skip
-        // middle five numbers in below loop
         if (num % 2 == 0 || num % 3 == 0)
             return false;
 
@@ -338,16 +301,12 @@ public class InteractionDictionary{
     }
 
     /**
-    *
-    *@return most recent interaction.
-    */
-    public void checkLastInteraction()
-    {
-
-    }
-
-
-   public InteractionList findSubject(String subject){
+     * Finds an InteractionList in the dictionary with a given subject.
+     *
+     * @param subject Subject to find
+     * @return The appropriate InteractionList
+     */
+    public InteractionList findSubject(String subject){
         int hashIndex = this.hashIndex(subject);
         int probeIndex = this.linearProbe(subject, hashIndex);
         return subjectList[probeIndex];

@@ -13,6 +13,7 @@ public class MyNetwork{
     /**
      * Creates new Network of size = double network size + X to reach
      * next prime number.
+     *
      * @param currentSize Capacity of current network needing to be
      * resized.
      * @precondition Current network has load factor of 0.75
@@ -28,35 +29,36 @@ public class MyNetwork{
 
 
     /**
-    *
-    *
-    */
+     * Takes a key value and returns a hash index.
+     *
+     * @param key The key value
+     * @return Hash index
+     */
     public int getHashIndex(int key){
         return key % this.network.length;
     }
 
 
     /**
-    * Adds new contact to Network, returns true if successful,
-    * false if not.
-    * @return true or false
-    * - Combined your edits under the else statement, Emma, with
-    * what I'd created previously to transfer data to new network.
-    */
+     * Adds new contact to Network, returns true if successful,
+     * false if not.
+     *
+     * @return true or false
+     */
     public boolean addContact(ContactInformation newContact){
 
         int currentSize = this.network.length;
         if (this.needsResizing()){
-          ContactInformation[] newNetwork = new ContactInformation[currentSize];
-            
+            ContactInformation[] newNetwork = new ContactInformation[currentSize];
+
             ContactInformation[] temp = network;
             this.network = newNetwork;
             for (int i=0; i <= temp.length; i++){ //copies entries to new, larger network.
-              if (temp[i] != null){
-                this.addContact(temp[i]);
-              }
+                if (temp[i] != null){
+                    this.addContact(temp[i]);
+                }
             }
-    
+
         }
 
         if (isFull()){
@@ -70,33 +72,10 @@ public class MyNetwork{
         return true;
     }
 
-/**
-// working version that I made is below -Emma 
-    public boolean addContact(ContactInformation newContact){
-        // Brendan:
-        // Refactor method so that array resizes for load factor of 0.75
-        // Make sure the new size is next prime number after doubling
-        int currentSize = this.network.length;
-        if (this.needsResizing()){
-            MyNetwork newNetwork = new MyNetwork(currentSize);
-        }
-
-        if (isFull()){
-            return false;
-        }
-        else{
-            int hashIndex = this.getHashIndex(newContact.key());
-            int probeIndex = quadraticProbe(hashIndex);
-            network[probeIndex] = newContact;
-        }
-        return true;
-    }
-    *
-    */
-
     /**
      * Checks network for load factor > 0.75.
      * Triggers replacement network creation if load factor > 0.75.
+     *
      * @precondition Assumes no empty spaces in network array.
      * @return new network if necessary, otherwise performs no action.
      */
@@ -115,9 +94,10 @@ public class MyNetwork{
     }
 
     /**
-    *
-    *
-    */
+     * Checks to see if the network is full.
+     *
+     * @return True or False
+     */
     public boolean isFull(){
         for (int i=0; i < network.length; i++){
             if (network[i] == null){
@@ -127,14 +107,15 @@ public class MyNetwork{
         return true;
     }
 
-    // Emma:
-    // Quadratic probing method
 
     /**
-    *
-    *
-    */
-     public int quadraticProbe(int hashIndex, String contactName)
+     * Performs a quadratic probe to find the next available index.
+     *
+     * @param hashIndex The current hash index
+     * @param contactName The contact name to use
+     * @return
+     */
+    public int quadraticProbe(int hashIndex, String contactName)
     {
         int increment = 1;
         int emptyIndex = -1;
@@ -145,7 +126,7 @@ public class MyNetwork{
         {
             hashIndex = (hashIndex + increment) % network.length;
             increment = adjustIncrement(increment);
-            
+
             if(network[hashIndex] != null && contactName.equals(network[hashIndex].getName()))
             {
                 found = true;
@@ -156,9 +137,10 @@ public class MyNetwork{
     }
 
     /**
-    *
-    *
-    */
+     * Increases the increment that will be added to the index the probe sequence is currently at
+     * @param increment the number of indexes in the hash table the probe sequence will skip next
+     * @return the increment to add to the index the probe sequence is currently add
+     */
     public int adjustIncrement(int increment)
     {
         if(increment == 1)
@@ -173,10 +155,13 @@ public class MyNetwork{
 
 
     /**
-    *
-    *
-    */
-   public int getOutput(int emptyIndex, int hashIndex, boolean found)
+     * Determines the index the quadratic probe function will return
+     * @param emptyIndex the first available index the probe sequence reached, or -1 if the probe sequence couldn't find an available index
+     * @param hashIndex the index that the hash function returned
+     * @param found a boolean that is true if the probe sequence found an entry for the contact whose name was provided as an argument to quadraticProbe
+     * @return the index the quadratic probe function will return 
+     */
+    public int getOutput(int emptyIndex, int hashIndex, boolean found)
     {
         if(emptyIndex == -1 || (found == true))
         {
@@ -188,9 +173,8 @@ public class MyNetwork{
     }
 
     /**
-    *
-    *
-    */
+     * Prints out the complete network
+     */
     public void showNetwork(){
         for (ContactInformation contact:network){
             if (contact != null){
@@ -201,21 +185,25 @@ public class MyNetwork{
     }
 
     /**
-    *
-    *
-    */
-    public InteractionList getSubject(String contactName)
+     * Returns a list of interactions for a given contact and subject
+     * @param contactName the contact whose interactions you want to access
+     * @param subjectName thesubject of the interactions you want to access
+     * @return the list of interactions for this contact and subject
+     */
+    public InteractionList getSubject(String contactName, String subjectName)
     {
         ContactInformation contactInfo = getContactInfo(contactName);
-        InteractionList subjectList = contactInfo.getSubject(contactName);
+        InteractionList subjectList = contactInfo.getSubject(subjectName);
         return subjectList;
     }
 
 
     /**
-    *
-    *
-    */
+     * Gets requested contact's information, returns it.
+     *
+     * @param contactName The name of the contact
+     * @return All information that has been stored in the InteractionDictionary for that contact
+     */
     public ContactInformation getContactInfo(String contactName)
     {
         int hashCode = MyNetwork.getHashCode(contactName);
@@ -227,9 +215,11 @@ public class MyNetwork{
     }
 
     /**
-    *
-    *
-    */
+     *
+     * Converts the contact name to a hash code 
+     * @param contactName the name of the contact that will be converted to a hash code
+     * @return the hash code that was created from the name provided
+     */
     public static int getHashCode(String contactName){
         contactName = contactName.toLowerCase();
         int hashCode = 0;
@@ -241,16 +231,23 @@ public class MyNetwork{
 
 
     /**
-    *
-    *
-    */
+     *
+     * Adds an interaction that occurred with a specific contact to InteractionDictionary
+     * @param contactName the name of the contact who the interaction occurred with
+     * @param toAdd the notes on the interaction
+     */
     public void addInteraction(String contactName, Interaction toAdd)
     {
-      ContactInformation contactInfo = getContactInfo(contactName);
-      InteractionDictionary contactDict = contactInfo.getInteractions();
-      contactDict.addInteraction(toAdd);
+        ContactInformation contactInfo = getContactInfo(contactName);
+        InteractionDictionary contactDict = contactInfo.getInteractions();
+        contactDict.addInteraction(toAdd);
     }
 
+    /**
+     * Shows the interactions with a given contact.
+     * 
+     * @param contactName The name of the contact
+     */
     public void showInteractions(String contactName)
     {
         ContactInformation contactInfo = getContactInfo(contactName);

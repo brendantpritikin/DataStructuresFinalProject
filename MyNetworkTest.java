@@ -1,19 +1,5 @@
 public class MyNetworkTest {
     public static void main(String[] args) {
-        // // Build up to MyNetwork
-        // Interaction test = new Interaction("03-10-2021", "Taking a test run",
-        //         "This is simply to test the Interaction class. Don\'t you worry, there\'s nothing else going on here.");
-
-        // Interaction test2 = new Interaction("03-09-2021", "Another Test Run",
-        //         "This is simply to test the Interaction class. Don\'t you worry, there\'s nothing else going on here.");
-
-        // InteractionStack testStack = new InteractionStack();
-
-        // testStack.addInteraction(test2);
-        // testStack.addInteraction(test);
-
-      
-
         // MyNetwork Construction
 
         MyNetwork testNetwork = new MyNetwork();
@@ -42,7 +28,7 @@ public class MyNetworkTest {
         testNetwork.addInteraction("Brendan Pritikin", name2);
         testNetwork.addInteraction("Brendan Pritikin", jobDetails);
 
-        InteractionList subjectList = brendanInfo.getSubject("Contact Name");
+        InteractionList subjectList = testNetwork.getSubject("Brendan Pritikin", "Contact Name");
         System.out.println("-----------------------------------------------");
         System.out.println("Here are all interactions with Brendan Pritikin regarding other peoples names");
         subjectList.showInteractions();

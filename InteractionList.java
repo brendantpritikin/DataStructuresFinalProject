@@ -1,57 +1,55 @@
 import java.util.ArrayList;
 public class InteractionList
 {
-  private String subject;
-  private ArrayList<Interaction> interactions;
+    private String subject;
+    private ArrayList<Interaction> interactions;
 
-   /**
-   *
-   *
-   */
-  public InteractionList(String inSubject, ArrayList<Interaction> inInteractions)
-  {
-    subject = inSubject;
-    interactions = inInteractions;
-  }
+    public InteractionList(String inSubject, ArrayList<Interaction> inInteractions)
+    {
+        subject = inSubject;
+        interactions = inInteractions;
+    }
 
-  /**
-   *
-   *
-   */
-  public String getSubject()
-  {
-    return subject;
-  }
+    /**
+     * Gets subject of InteractionList
+     *
+     * @return Subject
+     */
+    public String getSubject()
+    {
+        return subject;
+    }
 
 
     /**
-    *
-    *
-    */
-   public ArrayList<Interaction> getInteractions()
-  {
-    return interactions;
-  }
-
-  /**
-   *
-   *
-   */
-  public void showInteractions()
-  {
-    for(Interaction currentInteraction : interactions)
+     * Gets interactions from InteractionList
+     *
+     * @return interactions
+     */
+    public ArrayList<Interaction> getInteractions()
     {
-      System.out.println(currentInteraction);
+        return interactions;
     }
-  }
 
-  /**
-   *
-   *
-   */
-  public void addInteraction(Interaction toAdd)
-  {
-interactions.add(toAdd);
-  }
-  
+    /**
+     * Shows all interactions in the list.
+     */
+    public void showInteractions()
+    {
+        for(Interaction currentInteraction : interactions)
+        {
+            System.out.println(currentInteraction);
+        }
+    }
+
+    /**
+     * Adds an interaction to the list.
+     *
+     * @param toAdd Interaction to add
+     */
+    public void addInteraction(Interaction toAdd)
+    {
+        interactions.add(toAdd);
+    }
+
 }
