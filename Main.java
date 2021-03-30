@@ -1,40 +1,45 @@
-import java.util.Calendar;
-class Main {
-
+public class Main{
     public static void main(String[] args) {
-      // Build up to MyNetwork
-        Interaction test = new Interaction("03-10-2021", "Taking a test run",
-                "This is simply to test the Interaction class. Don\'t you worry, there\'s nothing else going on here.");
+        //We affirm we have carried out our academic endeavors with full academic honesty. [Signed, Brendan Pritikin, David Bond and Emma Flatland]
 
-        Interaction test2 = new Interaction("03-09-2021", "Another Test Run",
-                "This is simply to test the Interaction class. Don\'t you worry, there\'s nothing else going on here.");
+        MyNetwork testNetwork = new MyNetwork();
 
-        InteractionStack testStack = new InteractionStack();
 
-        testStack.addInteraction(test2);
-        testStack.addInteraction(test);
+        InteractionDictionary emmaDict = new InteractionDictionary();
+        ContactInformation emma = new ContactInformation(1111111, "Emma Flatland", "Data Analyst", "Data Co.", emmaDict);
 
-        ContactInformation emma = new ContactInformation(1234567890, "Emma Flatland", "Data Analyst",
-                "Data Co.", testStack);
+        InteractionDictionary brendanDict = new InteractionDictionary();
+        ContactInformation brendan = new ContactInformation(2222222, "Brendan Pritikin", "Software Programmer", "Cal Data", brendanDict);
 
-        ContactInformation brendan = new ContactInformation(5642843395L, "Brendan Pritikin",
-                "Software Programmer", "Cal Data", testStack);
+        testNetwork.addContact(emma);
+        testNetwork.addContact(brendan);
 
-        // MyNetwork Construction
+        Interaction name1 = new Interaction(3, 11, 2021, "Contact Name", "Sally Jones would be a useful person to contact");
+        Interaction name2 = new Interaction(3, 5, 2021, "Contact Name", "John Smith would be a useful person to contact");
+        Interaction jobDetails = new Interaction(3, 1, 2021, "Job Details", "The hiring team is looking for computer science majors");
 
-        MyNetwork network = new MyNetwork();
-        network.addContact(emma);
-        network.addContact(brendan);
 
-        // MyNetwork Testing
+        ContactInformation brendanInfo = testNetwork.getContactInfo("Brendan Pritikin");
+        System.out.println("Here is Brendan Pritikin's contact information:");
+        brendanInfo.showContact();
 
-        network.showNetwork();
 
-        Calendar today = Calendar.getInstance();
-        today.set(2021, 3, 11);
-        Calendar tomorrow = Calendar.getInstance();
-        tomorrow.set(2021, 3, 12);
-        System.out.println(today.compareTo(tomorrow));
-    
+        testNetwork.addInteraction("Brendan Pritikin", name1);
+        testNetwork.addInteraction("Brendan Pritikin", name2);
+        testNetwork.addInteraction("Brendan Pritikin", jobDetails);
+
+        InteractionList subjectList = testNetwork.getSubject("Brendan Pritikin", "Contact Name");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Here are all interactions with Brendan Pritikin regarding other peoples names");
+        subjectList.showInteractions();
+
+        System.out.println("----------------------------------------------");
+        System.out.println("Here are all interactions with Brendan Pritikin, chronological order");
+        testNetwork.showInteractions("Brendan Pritikin");
+
+
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Here is the entire network:");
+        testNetwork.showNetwork();
     }
 }

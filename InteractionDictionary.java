@@ -60,85 +60,81 @@ public class InteractionDictionary{
     }
 
     /**
-     * A merge helper function for mergeSort.
-     * Professor Aaron Cass provided help making this method for Programming on Purpose (CSC-120) in Fall 2021
-     * @param l1 The first list to be merged
-     * @param l2 The second list to be merged
+     * A merge helper function for mergeSort
+     * @param listA The first list to be merged
+     * @param listB The second list to be merged
      * @return The combined list
      */
-    private static ArrayList<Interaction> merge(ArrayList<Interaction> l1, ArrayList<Interaction> l2)
+    private static ArrayList<Interaction> merge(ArrayList<Interaction> listA, ArrayList<Interaction> listB)
     {
-        int size1 = l1.size();
-        int size2 = l2.size();
+        int sizeA = listA.size();
+        int sizeB = listB.size();
 
-        ArrayList<Interaction> resultList = new ArrayList<Interaction>();
+        ArrayList<Interaction> mergedList = new ArrayList<Interaction>();
         int i = 0;
         int j = 0;
-
-        for (int k = 0; i <  size1 && j < size2; k++)
+        for (int k = 0; i <  sizeA && j < sizeB; k++)
         {
-            Interaction interaction1 =l1.get(i);
-            Interaction interaction2 = l2.get(j);
-            Calendar day1 = interaction1.getDate();
-            Calendar day2 = interaction2.getDate();
+            Interaction interactionA =listA.get(i);
+            Interaction interactionB = listB.get(j);
 
+            Calendar dayA = interactionA.getDate();
+            Calendar dayB = interactionB.getDate();
 
-            int winVal = day1.compareTo(day2);
+            int winVal = dayA.compareTo(dayB);
 
             if(winVal == 1)
             {
-                resultList.add(interaction1);
+                mergedList.add(interactionA);
                 i++;
-
             }
             else
             {
-                resultList.add(interaction2);
+                mergedList.add(interactionB);
                 j++;
-
             }
         }
 
-        for (int k = 0; i < l1.size(); k++)
+        for (int k = 0; i < listA.size(); k++)
         {
-            resultList.add(l1.get(i));
+            mergedList.add(listA.get(i));
             i++;
 
         }
-        for(int k = 0; j < l2.size(); k++)
+        for(int k = 0; j < listB.size(); k++)
         {
-            resultList.add(l2.get(j));
+            mergedList.add(listB.get(j));
             j++;
-
         }
-        return resultList;
+        return mergedList;
 
     }
 
     /**
      * A mergeSort helper method to sort Interactions for sortInteractions.
-     *
      * @param list The list to be sorted
      * @return The sorted list
      */
-    public static ArrayList<Interaction> mergeSort(ArrayList<Interaction> list)
+     public static ArrayList<Interaction> mergeSort(ArrayList<Interaction> list)
     {
-        int n = list.size();
-        if (n <= 1)
+        int listSize = list.size();
+        if (listSize <= 1)
         {
             return list;
         }
-        int mid = (n)/2;
+        else
+            {
 
+            int middleIndex = (listSize) / 2;
 
-        ArrayList<Interaction> list1 = getSublist(list, 0, mid-1);
+            ArrayList<Interaction> listA = getSublist(list, 0, middleIndex - 1);
+            ArrayList<Interaction> listB = getSublist(list, middleIndex, listSize - 1);
 
-        ArrayList<Interaction> list2 = getSublist(list, mid, n-1);
+            ArrayList<Interaction> sortedListA = mergeSort(listA);
+            ArrayList<Interaction> sortedListB = mergeSort(listB);
 
-        ArrayList<Interaction> sortedList1 = mergeSort(list1);
-        ArrayList<Interaction> sortedList2 = mergeSort(list2);
-
-        return merge(sortedList1, sortedList2);
+            return merge(sortedListA, sortedListB);
+        }
     }
 
 
