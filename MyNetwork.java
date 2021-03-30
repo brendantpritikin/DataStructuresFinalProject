@@ -138,6 +138,7 @@ public class MyNetwork{
 
     /**
      * Increases the increment that will be added to the index the probe sequence is currently at
+     *
      * @param increment the number of indexes in the hash table the probe sequence will skip next
      * @return the increment to add to the index the probe sequence is currently add
      */
@@ -156,10 +157,11 @@ public class MyNetwork{
 
     /**
      * Determines the index the quadratic probe function will return
+     *
      * @param emptyIndex the first available index the probe sequence reached, or -1 if the probe sequence couldn't find an available index
      * @param hashIndex the index that the hash function returned
      * @param found a boolean that is true if the probe sequence found an entry for the contact whose name was provided as an argument to quadraticProbe
-     * @return the index the quadratic probe function will return 
+     * @return the index the quadratic probe function will return
      */
     public int getOutput(int emptyIndex, int hashIndex, boolean found)
     {
@@ -186,9 +188,10 @@ public class MyNetwork{
 
     /**
      * Returns a list of interactions for a given contact and subject
-     * @param contactName the contact whose interactions you want to access
-     * @param subjectName thesubject of the interactions you want to access
-     * @return the list of interactions for this contact and subject
+     *
+     * @param contactName the name of the contact whose interactions you want to access
+     * @param subjectName the name of the subject of the interactions you want to access
+     * @return the list of interactions that occurred with the contact that fall under the subject specified
      */
     public InteractionList getSubject(String contactName, String subjectName)
     {
@@ -215,8 +218,8 @@ public class MyNetwork{
     }
 
     /**
+     * Converts the contact name to a hash code
      *
-     * Converts the contact name to a hash code 
      * @param contactName the name of the contact that will be converted to a hash code
      * @return the hash code that was created from the name provided
      */
@@ -231,8 +234,8 @@ public class MyNetwork{
 
 
     /**
-     *
      * Adds an interaction that occurred with a specific contact to InteractionDictionary
+     *
      * @param contactName the name of the contact who the interaction occurred with
      * @param toAdd the notes on the interaction
      */
@@ -245,7 +248,7 @@ public class MyNetwork{
 
     /**
      * Shows the interactions with a given contact.
-     * 
+     *
      * @param contactName The name of the contact
      */
     public void showInteractions(String contactName)
